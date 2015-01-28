@@ -37,12 +37,13 @@ mongoose.connect('mongodb://localhost/library_database');
 var Book = new mongoose.Schema({
 	title: String,
 	author: String,
-	releaseDate: Date
+	releaseDate: Date,
+	keywords: [ Keywords ]  
 });
 
 var Keywords = new mongoose.Schema({
-	keyword: String
-});                                  
+    keyword: String
+});
 
 // models
 var BookModel = mongoose.model('Book', Book);
@@ -71,7 +72,7 @@ app.post( '/api/books', function( request, response ) {
         title: request.body.title,
         author: request.body.author,
         releaseDate: request.body.releaseDate,
-	keywords: request.body.keywords
+		keywords: request.body.keywords
     });
     
     return book.save( function( err ) {
